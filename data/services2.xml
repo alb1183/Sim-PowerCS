@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Services>
+	<list>
+		<service>
+			<name>Kubernetes-cluster</name>
+			<power>150</power>
+			<smart>true</smart>
+			<priority>10</priority>
+		</service>
+		<service>
+			<name>Internet</name>
+			<power>25</power>
+			<smart>true</smart>
+			<priority>9</priority>
+		</service>
+		<service>
+			<name>VPN-router</name>
+			<power>15</power>
+			<smart>true</smart>
+			<priority>8</priority>
+		</service>
+		<service>
+			<name>CCTV</name>
+			<power>60</power>
+			<smart>true</smart>
+			<priority>7</priority>
+		</service>
+		
+		<service>
+			<name>Backups</name>
+			<power>50.0</power>
+			<smart>true</smart>
+			<priority>5</priority>
+			<smartParameters>
+				<minTime>600</minTime>
+				<maxTime>900</maxTime>
+				<runTime>120</runTime>
+			</smartParameters>
+		</service>
+		
+		<service>
+			<name>Dashboard-services</name>
+			<power>50</power>
+			<smart>true</smart>
+			<priority>4</priority>
+		</service>
+		<service>
+			<name>Game-servers</name>
+			<power>140</power>
+			<smart>true</smart>
+			<priority>2</priority>
+		</service>
+		
+		<service>
+			<name>Dashboard-displays</name>
+			<power>180.0</power>
+			<smart>true</smart>
+			<priority>1</priority>
+			<smartParameters>
+				<minTime>600</minTime>
+				<maxTime>1080</maxTime>
+				<runTime>0</runTime>
+			</smartParameters>
+		</service>
+	</list>
+</Services>

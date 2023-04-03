@@ -20,10 +20,6 @@ public class Service {
 	private int runTime = 0;
 	private int runningTime = 0;
 
-	private double lastReward = 0;
-	private double sumRewards = 0; // TODO
-	private int numRewards = 0;
-
 	public Service(String name, boolean smart, double powerConsumption, int[] op) {
 		this.name = name;
 		this.smart = smart;
@@ -112,32 +108,6 @@ public class Service {
 		return (this.lastOn%1440) - this.minTime;
 	}
 	
-	public double getLastReward() {
-		return lastReward;
-	}
-	
-	public void setLastReward(double r) {
-		this.lastReward = r;
-		
-		// 
-		this.sumRewards = r;
-		this.numRewards = 1;
-	}
-	
-	public void setMeanReward(double r) {
-		this.lastReward = (this.lastReward + r) / 2.0;
-		
-		// 
-		this.sumRewards = this.lastReward;
-		this.numRewards = 1;
-	}
-	
-	public void setAvgReward(double r) {
-		this.sumRewards += r;
-		this.numRewards++;
-		this.lastReward = this.sumRewards / this.numRewards;
-	}
-
 	public void initDay(int d) {
 		// Solo modifico cosas en los servicios inteligentes
 		if(this.smart) {
@@ -146,10 +116,6 @@ public class Service {
 			
 			// Si estoy apagado borro el tiempo de ultimo arranque, si no pongo el del inicio del dia
 			this.lastOn = (!this.onOff) ? -1 : d * 1440;
-			
-			// 
-			this.sumRewards = this.lastReward;
-			this.numRewards = 1;
 		}
 	}
 	
@@ -207,11 +173,11 @@ public class Service {
 			return load;
 		
 		// Si tiene definido un rango de inclusion compruebo si está dentro del mismo
-		if(this.operatingRange[0] == 1 && minuteDay >= this.operatingRange[1] && minuteDay < this.operatingRange[2])
+		if(this.operatingRange[0] == 1 && (minuteDay >= this.operatingRange[1] && minuteDay < this.operatingRange[2]))
 			return load;
 		
 		// Si tiene definido un rango de exclusion compruebo si está fuera del mismo
-		if(this.operatingRange[0] == 2 && !(minuteDay >= this.operatingRange[1] && minuteDay < this.operatingRange[2]))
+		if(this.operatingRange[0] == 2 && (minuteDay < this.operatingRange[1] || minuteDay >= this.operatingRange[2]))
 			return load;
 		
 		

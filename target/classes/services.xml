@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Services>
+	<list>
+		<service>
+			<name>Luces valla</name>
+			<power>15.0</power>
+			<smart>false</smart>
+			<operatingRange>
+				<type>2</type>
+				<min>480</min>
+				<max>1200</max>
+			</operatingRange>
+		</service>
+		<service>
+			<name>Luces fachada</name>
+			<power>10.0</power>
+			<smart>false</smart>
+			<operatingRange>
+				<type>2</type>
+				<min>480</min>
+				<max>1200</max>
+			</operatingRange>
+		</service>
+		<service>
+			<name>Frigorifico</name>
+			<power>120.0</power>
+			<smart>false</smart>
+		</service>
+		
+		<service>
+			<name>Motor piscina</name>
+			<power>600.0</power>
+			<smart>true</smart>
+			<priority>4</priority>
+			<smartParameters>
+				<minTime>540</minTime>
+				<maxTime>1020</maxTime>
+				<runTime>180</runTime>
+			</smartParameters>
+		</service>
+		<service>
+			<name>Videograbador</name>
+			<power>20.0</power>
+			<smart>true</smart>
+			<priority>10</priority>
+		</service>
+		<service>
+			<name>Internet</name>
+			<power>40.0</power>
+			<smart>true</smart>
+			<priority>8</priority>
+		</service>
+		<service>
+			<name>StreamServices</name>
+			<power>30</power>
+			<smart>true</smart>
+			<priority>2</priority>
+		</service>
+		<service>
+			<name>Fuente de agua</name>
+			<power>35</power>
+			<smart>true</smart>
+			<priority>1</priority>
+			<smartParameters>
+				<minTime>540</minTime>
+				<maxTime>900</maxTime>
+				<runTime>0</runTime>
+			</smartParameters>
+		</service>
+		
+		<!--<service>
+			<name></name>
+			<power></power>
+			<smart></smart>
+			<operatingRange>
+				<type></type>
+				<min></min>
+				<max></max>
+			</operatingRange>
+			<priority></priority>
+			<smartParameters>
+				<minTime></minTime>
+				<maxTime></maxTime>
+				<runTIme></runTime>
+			</smartParameters>
+		</service>-->
+	</list>
+</Services>
