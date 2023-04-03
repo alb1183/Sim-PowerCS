@@ -1,0 +1,13 @@
+target/
+output/
+
+#Eclipse project files
+.classpath
+.project
+.settings/
+bin/
+
+#Windows files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
