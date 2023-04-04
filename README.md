@@ -26,7 +26,7 @@ In today's world, optimizing energy consumption is critical to combat climate ch
   - xchart
 
 ## Getting Started 
-[Getting Started](Getting Started.md)
+[Getting Started](Getting_Started.md)
 
 # Software description
 The Sim-PowerCS simulator is a software application designed to simulate power systems, which has been developed using the Java language. In order to enhance the flexibility and extensibility of the implemented methods, the application follows a common object-oriented programming pattern approach. This approach allows developers to easily build upon the existing functionality and add new features to the simulator, without requiring them to modify the existing code extensively.
