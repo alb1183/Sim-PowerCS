@@ -49,14 +49,14 @@ In addition, everything related to the simulator log is configured, e.g. generat
 Example configuration of the simulator:
 ```XML
 <Config>
-	<controller>Method</controller> <!-- Implemented algorithm -->
+	<controller>Method</controller> <!-- implemented algorithm -->
 	<procedural>true</procedural> <!-- boolean, false for repeatability  -->
 	<seed>0</seed> <!-- 0: random -->
 	<days>7</days> <!-- num days -->
-	<battery>4000</battery> <!-- Wh -->
+	<battery>4000</battery> <!-- capacity in W -->
 	
-	<printResults>false</printResults>
-	<printStats>true</printStats>
+	<printResults>false</printResults> <!-- print detailed results on the console -->
+	<printStats>true</printStats> <!-- print summarized statistics on the console -->
 	<showGraphs>true</showGraphs> <!-- show graphs at the end -->
 	<saveGraphs>false</saveGraphs> <!-- save graphs png -->
 	<saveResults>false</saveResults> <!-- save csv -->
@@ -78,20 +78,20 @@ XML structure of each service:
 	<list>
 		....
 		<service>
-			<name></name>
-			<power></power>
-			<smart></smart>
-			<operatingRange>
-				<type></type>
-				<min></min>
-				<max></max>
+			<name></name>			<!-- string name -->
+			<power></power>			<!-- power consumption in Wh -->
+			<smart></smart>			<!-- smart management -->
+			<operatingRange>		<!-- time rule -->
+				<type></type>		<!-- 1: between, 2: outside -->
+				<min></min>			<!-- time of the day in minutes -->
+				<max></max>			<!-- time of the day in minutes -->
 			</operatingRange>
-			<priority></priority>
-			<smartParameters>
-				<minTime></minTime>
-				<maxTime></maxTime>
-				<runTIme></runTime>
-			</smartParameters>
+			<priority></priority>	<!-- service priority, only for smarts -->
+			<smartParameters>		<!-- only for smart services, optional -->
+				<minTime></minTime>	<!-- min time of the day in minutes to start the service -->
+				<maxTime></maxTime>	<!-- max time of the day in minutes to start the service -->
+				<runTime></runTime>	<!-- max. switch-on time; 0: unlimited, otherwise minutes -->
+			</smartParameters>		<!--  -->
 		</service>
 		....
 	</list>
@@ -186,8 +186,6 @@ Example of a configuration file for the previous services:
 	</list>
 </Services>
 ```
-
-Table of configured services in the demo code:
 
 ## Procedural data models
 All the information used by the simulator to determine the solar production and passive energy consumption of the system is based on statistical models modelled using data from a real solar infrastructure.
