@@ -190,20 +190,64 @@ Example of a configuration file for the previous services:
 ## Procedural data models
 All the information used by the simulator to determine the solar production and passive energy consumption of the system is based on statistical models modelled using data from a real solar infrastructure.
 
-...
-where for each hour the mean value of solar radiation and the upper and lower bound of the 95\% confidence interval are indicated.
+As can be seen in the image, each hour the mean value of solar radiation and the upper and lower bound of the 95\% confidence interval are indicated.
 The confidence interval is used to procedurally generate each day different but correlated values by using Perlin noise, thus enabling a dynamic and realistic behaviour of the simulations.
 
 
 ![energyProductionModel](images/energyProductionModel.png)
 
+Example of a CSV file with solar radiation statistical data (the first graph in the image above plot this data)
+
+```CSV
+hour,numberOfSamples,mean,standardDeviation,StandardErrorMean,CIlower,CIupper
+0,7,0,0,0,0,0
+1,7,0,0,0,0,0
+2,7,0,0,0,0,0
+3,7,0,0,0,0,0
+4,7,0,0,0,0,0
+5,7,0,0,0,0,0
+6,7,0,0,0,0,0
+7,7,4.49142857142857,2.4819846129756,1.0132659752049,2.01205604833774,6.9708010945194
+8,7,53.7557142857143,17.1367819393869,6.99606193080669,36.6369674358793,70.8744611355493
+9,7,225.165714285714,62.5169270030506,25.5224285740495,162.714581337871,287.616847233557
+10,7,367.952857142857,20.2389160729898,8.26250288763968,347.735240906972,388.170473378742
+11,7,619.592857142857,120.864741028182,49.3428239021129,498.855316567818,740.330397717896
+12,7,611.468571428571,41.8264088938123,17.0755599271414,569.686181477913,653.25096137923
+13,7,663.495714285714,81.9287560134094,33.4472745823053,581.653181721771,745.338246849657
+14,7,557.572857142857,204.873464258168,83.6392415448065,352.915005786094,762.230708499621
+15,7,475.902857142857,252.938752778499,103.261813413884,223.230302129704,728.575412156011
+16,7,351.765714285714,131.000810666339,53.4808570039132,220.90277147345,482.628657097979
+17,7,192.311428571429,79.8140061702981,32.5839315740964,112.581420245875,272.041436896982
+18,7,33.4114285714286,15.0368585244962,6.13877178657254,18.3903951353898,48.4324620074673
+19,7,0,0,0,0,0
+20,7,0,0,0,0,0
+21,7,0,0,0,0,0
+22,7,0,0,0,0,0
+23,7,0,0,0,0,0
+```
+
+
 ## Energy management algorithm
+This is the main point of extension of the simulator with respect to energy management.
+
+At the beginning of each minute of the simulator, the list of energy generators and energy producers is browsed to determine the energy production and demand at that exact minute.
+
+The abstract method "run" is then invoked and this information is passed to it to determine the energy state (lack or surplus of energy) and make the appropriate energy decisions.
 
 ```Java
 public abstract class EnergyController {
 	public abstract void run(int minute, double powerProduction, double electricalLoad);
 ```
 
+In the simulator we provide a basic but functional example of an energy controller. Our example algorithm first determines whether energy is needed in that iteration because demand exceeds production or whether we otherwise have a surplus of production.
+
+In the case of needing energy, it checks if the batteries are not discharged to use them as an energy source, otherwise it buys the energy from the grid (incurring a cost that is accumulated).
+
+On the other hand, if it has a surplus production it first checks if the batteries are not charged to use the excess energy to charge them, if not it sells the surplus energy to the grid (incurring a monetary benefit that is recorded).
+
+As can be seen, the example energy algorithm is relatively simple but effective in many scenarios, yet it can easily be improved to take into account patterns in power generation, energy consumption or energy prices in the grid.
+
+This is the code needed to implement this behaviour:
 ```Java
 public class BasicEnergyController extends EnergyController {
 	
@@ -246,13 +290,20 @@ public class BasicEnergyController extends EnergyController {
 
 ## Service control algorithm
 
-
+As in the previous section, the service controller is defined as an abstract class with an extension point method, which is called at the end of each minute of the simulation to make decisions about services according to the output of that simulated minute.
 
 ```Java
 public abstract class ServiceController {
 .....
 	abstract protected double decision(int minute, Result resultSim);
 ```
+
+As we have already mentioned, after determining the energy actions and executing them, the controller of the services (energy consumers) is called to decide based on the current energy status what to do with each service (switch them on or off). 
+Our simulator has three service control algorithms, the most basic of which is detailed in the code below.
+This algorithm only takes into account manageable services, there will be more services that produce energy consumption but that have been defined as not controllable and therefore cannot be controlled.
+The behaviour of this algorithm is very simple and serves as a baseline of worst-case performance with respect to any possible smarter implementation.
+Essentially, the controller is limited to determining whether a service is within the timeslot where it can be switched on and has not yet exceeded its maximum switch-on time to keep it on or otherwise turn off the service.
+
 
 ```Java
 public class BasicController extends ServiceController {
@@ -301,4 +352,6 @@ public class BasicController extends ServiceController {
 ```
 
 ## Extension points
-Battery class, ....
+In addition to the two main extension points there are several abstract classes defined for other components that can be modified.
+For example the battery class, which is implemented as a simple battery that records its charge as a number but does not take into account possible degradations of its performance over time (charge cycles), nor any other more realistic behaviour.
+Similarly, the grid and solar panels can easily be improved using the abstract classes and our implementations as example code. 
