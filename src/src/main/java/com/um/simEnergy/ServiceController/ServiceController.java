@@ -89,6 +89,9 @@ public abstract class ServiceController {
 		//this.saveServicesStats(resultSim);
 	}
 
+    /**
+    * Reset daily parameters
+    */
 	public void initDay(int d) {
 		this.minBatteryPercentage = 100.0;
 	}
@@ -111,6 +114,10 @@ public abstract class ServiceController {
 		resultSim.setEnergyServices(energyServices);
 	}*/
 
-	// Punto de extension
+    /**
+    * Main extension point of the service controller, is invoked at the end of each minute of simulation.
+    * @param minute Minute
+    * @param resultSim Object with all the information collected during that minute's simulation for the controller to make decisions for the next minute to be simulated.e
+    */
 	abstract protected double decision(int minute, Result resultSim);
 }

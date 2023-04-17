@@ -1,22 +1,15 @@
 package com.um.simEnergy;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import com.um.simEnergy.EnergyController.BasicEnergyController;
 import com.um.simEnergy.EnergyController.EnergyController;
 import com.um.simEnergy.EnergyStorage.BasicBattery;
-import com.um.simEnergy.EnergyStorage.BasicGrid;
 import com.um.simEnergy.EnergyStorage.Battery;
 import com.um.simEnergy.EnergyStorage.Grid;
 import com.um.simEnergy.LoadPower.ElectricalLoad;
-import com.um.simEnergy.LoadPower.ModeledPasiveLoad;
-import com.um.simEnergy.LoadPower.RandomActiveLoad;
-import com.um.simEnergy.LoadPower.ServicesActiveLoad;
 import com.um.simEnergy.LoadPower.UnexpectedEvents;
-import com.um.simEnergy.PowerProducer.ModeledPhotovoltaicModule;
 import com.um.simEnergy.PowerProducer.PowerProducer;
-import com.um.simEnergy.PowerProducer.SimulatedPhotovoltaicModule;
 import com.um.simEnergy.Service.Service;
 import com.um.simEnergy.ServiceController.BasicController;
 import com.um.simEnergy.ServiceController.DummyController;
@@ -97,6 +90,11 @@ public class Simulation {
 		this.energyController = new BasicEnergyController(batteryStorage, gridStorage);
 	}
 
+    /**
+    * Determine the exact energy production for that minute using the list of energy sources.
+    * @param minute Minute
+    * @return Watts per hour of production in that minute
+    */
 	private double getPowerProduction(int minute) {
 		double powerProduction = 0.0;
 
@@ -108,6 +106,11 @@ public class Simulation {
 		return powerProduction;
 	}
 
+    /**
+    * Determine the exact load for that minute using the list of energy load (services, pasives, ...).
+    * @param minute Minute
+    * @return Watts per hour of load in that minute
+    */
 	private double getLoad(int minute) {
 		double load = 0.0;
 		
@@ -118,7 +121,10 @@ public class Simulation {
 		
 		return load;
 	}
-	
+
+    /**
+    * Reset daily parameters
+    */
 	private void initDay(int d) {
 		serviceController.initDay(d);
 		// Reset services day
@@ -126,7 +132,10 @@ public class Simulation {
 			service.initDay(d);
 		}
 	}
-	
+
+    /**
+    * Main simulation iteration (per minute)
+    */
 	private void diurnalCyclePerMinute(int day, int minute) {
 		// Calculo la potencia actual de las fuentes de energia y el consumo pasivo
 		double powerProduction = this.getPowerProduction(minute);
@@ -150,7 +159,10 @@ public class Simulation {
 		resultSim.update();
 		
 	}
-	
+
+    /**
+    * Method to run the main simulation
+    */
 	public void run() {
 		int days = this.config.getDays();
 		
@@ -172,7 +184,10 @@ public class Simulation {
 		}
 		
 	}
-	
+
+    /**
+    * Method to print results
+    */
 	public void results() {
 		if(this.config.isPrintResults())
 			SR.printResults();

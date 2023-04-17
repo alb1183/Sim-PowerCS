@@ -11,9 +11,10 @@ import com.um.simEnergy.PowerProducer.SimulatedPhotovoltaicModule;
 import com.um.simEnergy.Service.Service;
 
 /**
- * Codigo Principal
- *
- */
+*
+* Main code
+*
+*/
 public class App {
 	public static void main(String[] args) {
 		

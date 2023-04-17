@@ -18,6 +18,11 @@ import com.um.simEnergy.LoadPower.ElectricalLoad;
 import com.um.simEnergy.PowerProducer.PowerProducer;
 import com.um.simEnergy.Service.Service;
 
+/**
+*
+* Configuration class
+*
+*/
 public class Config {
 	private String controller;
 	private boolean procedural;
@@ -39,7 +44,11 @@ public class Config {
 
 	// Servicios definidos
 	private List<Service> servicesList;
-	
+
+    /**
+    * Method (constructor) to load configuration from xml file
+    * @param path Path to the configuration xml file
+    */
 	public Config(String path) {
 		// Parseo el XML
         File xmlFile = new File(path);
@@ -74,7 +83,12 @@ public class Config {
 		this.powerDemand = new LinkedList<ElectricalLoad>();
 		this.servicesList = new LinkedList<Service>();
 	}
-	
+
+    /**
+    * Method to load services from xml file
+    * @param path Path to the services xml file
+    * @return List of services as class Service
+    */
 	public List<Service> loadServices(String path) {
 		List<Service> servicesListNew = new LinkedList<Service>();
 		
