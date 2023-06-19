@@ -8,7 +8,7 @@ public class UnexpectedEvents {
 	}
 
 	public double getPowerProduction(int day, int minute, double powerProduction) {
-		if((minute%1440) >= 60*11 && (minute%1440) <= 60*14 && day <= 3)
+		if((minute%1440) >= 60*11 && (minute%1440) <= 60*14 && day <= 2)
 			return powerProduction * 0.8;
 		
 		return powerProduction;

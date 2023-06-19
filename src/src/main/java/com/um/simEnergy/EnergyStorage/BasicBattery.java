@@ -4,14 +4,16 @@ public class BasicBattery extends Battery {
 	private double capacity; // Capacidad maxima de la bateria en kWh
 	private double level; // Nivel actual de la bateria
 	//private double overloadFix = 45.0; // Consumo del inversor en Wh
+	private double maxFeasibleLoad;
 	
 	// Stats
 	private double overCapacityLoss;
 	private double lastUsage;
 	
-	public BasicBattery(double c) {
+	public BasicBattery(double c, double mFl) {
 		this.capacity = c;
 		this.level = c;
+		this.maxFeasibleLoad = mFl;
 	}
 	
 	public void loadWmperMinute(double wm) {
@@ -78,7 +80,10 @@ public class BasicBattery extends Battery {
 	}
 
 	public boolean isFeasible(double demandedEnergy) {
-		return demandedEnergy <= 0 || this.level-demandedEnergy >= 0;
+		if (demandedEnergy <= 0)
+			return true;
+		
+		return this.level-demandedEnergy >= 0 && demandedEnergy <= this.maxFeasibleLoad;
 	}
 
 	public boolean isFull() {

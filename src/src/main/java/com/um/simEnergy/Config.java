@@ -29,6 +29,7 @@ public class Config {
 	private double seed;
 	private int days;
 	private int battery;
+	private int batteryRate;
 	private Grid grid;
 	
 	private boolean printResults;
@@ -62,6 +63,7 @@ public class Config {
             this.controller = getTagValue("controller", doc);
             this.days = Integer.parseInt(getTagValue("days", doc));
             this.battery = Integer.parseInt(getTagValue("battery", doc));
+            this.batteryRate = Integer.parseInt(getTagValue("batteryRate", doc));
             this.procedural = getTagValue("procedural", doc).equals("true");
             this.seed = Double.parseDouble(getTagValue("seed", doc));
             if(this.seed == 0)
@@ -180,9 +182,13 @@ public class Config {
 	public int getDays() {
 		return days;
 	}
-	
+
 	public int getBattery() {
 		return battery;
+	}
+	
+	public int getBatteryRate() {
+		return batteryRate;
 	}
 	
 	public double getSeed() {

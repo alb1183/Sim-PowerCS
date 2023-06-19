@@ -151,12 +151,12 @@ public class SimulationResults {
 		
 		// Create Charts
 		XYChart chartEnergy = new XYChartBuilder().width(1920).height(1080).title("Energy Summary").xAxisTitle("X").yAxisTitle("Y").build();
-		chartEnergy.addSeries("Electrical Load (Wh)", xData, yDataElectricalLoad).setMarker(SeriesMarkers.NONE);
-		chartEnergy.addSeries("Electrical Production (Wh)", xData, yDataPowerProduction).setMarker(SeriesMarkers.NONE);
-		chartEnergy.addSeries("Electrical Demand (Wh)", xData, yDataEnergyUsage).setMarker(SeriesMarkers.NONE);
+		chartEnergy.addSeries("Electrical Load", xData, yDataElectricalLoad).setMarker(SeriesMarkers.NONE);
+		chartEnergy.addSeries("Electrical Production", xData, yDataPowerProduction).setMarker(SeriesMarkers.NONE);
+		chartEnergy.addSeries("Electrical Demand", xData, yDataEnergyUsage).setMarker(SeriesMarkers.NONE);
 		chartEnergy.addSeries("Battery Level (‰)", xData, yDataBatteryPercentage).setMarker(SeriesMarkers.NONE);
-		chartEnergy.addSeries("Battery Usage (Wh)", xData, yDataBatteryUsage).setMarker(SeriesMarkers.NONE).setLineStyle(SeriesLines.DASH_DASH);
-		chartEnergy.addSeries("Grid Usage (Wh)", xData, yDataGridUsage).setMarker(SeriesMarkers.NONE).setLineStyle(SeriesLines.DASH_DASH);
+		chartEnergy.addSeries("Battery Usage", xData, yDataBatteryUsage).setMarker(SeriesMarkers.NONE).setLineStyle(SeriesLines.DASH_DASH);
+		chartEnergy.addSeries("Grid Usage", xData, yDataGridUsage).setMarker(SeriesMarkers.NONE).setLineStyle(SeriesLines.DASH_DASH);
 		//chartEnergy.addSeries("Test (Wh)", yDataTest).setMarker(SeriesMarkers.NONE).setLineStyle(SeriesLines.DASH_DOT);
 		chartEnergy.getStyler().setZoomEnabled(true);
 		// Añado la barra de vertical de cada dia

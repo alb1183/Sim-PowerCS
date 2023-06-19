@@ -53,7 +53,7 @@ public class Simulation {
 		this.powerDemand = this.config.getPowerDemand();
 
 		// Almacenes de energia (baterias y red electrica)
-		this.batteryStorage = new BasicBattery(this.config.getBattery());
+		this.batteryStorage = new BasicBattery(this.config.getBattery(), this.config.getBatteryRate());
 		this.gridStorage = this.config.getGrid();
 		
 		// Listado de servicios definidos

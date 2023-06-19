@@ -52,7 +52,7 @@ One of the most important aspects is that it has been programmed following the r
 
 # Illustrative Examples
 In this section we demonstrate a basic usage of the simulation.
-The simulator is configured in procedural mode to simulate for one week a self-sufficient house with a solar panel system, a 4kW battery and a grid connection to buy and sell energy when needed.
+The simulator is configured in procedural mode to simulate for one week a smart-house with a solar panel system, a 4kWh battery and a grid connection to buy and sell energy when needed.
 
 
 ![summary](images/summary.png)

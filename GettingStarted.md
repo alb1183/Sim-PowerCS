@@ -42,7 +42,7 @@ sm.results();
 
 
 ## Configuration of the simulation environment via XML
-The simulation environment is configured by using the XML file config.xml, which indicates which energy and service controller will be used, the capacity of the batteries (kW), the number of days to be simulated and whether procedural data generation is activated (including the seed).
+The simulation environment is configured by using the XML file config.xml, which indicates which energy and service controller will be used, the capacity of the batteries (Wh), the discharge rate of the batteries (W), the number of days to be simulated and whether procedural data generation is activated (including the seed).
 
 In addition, everything related to the simulator log is configured, e.g. generating graphs, saving results in CSV files, displaying statistics in the console, and so on.
 
@@ -53,7 +53,8 @@ Example configuration of the simulator:
 	<procedural>true</procedural> <!-- boolean, false for repeatability  -->
 	<seed>0</seed> <!-- 0: random -->
 	<days>7</days> <!-- num days -->
-	<battery>4000</battery> <!-- capacity in W -->
+	<battery>4000</battery> <!-- capacity in Wh -->
+	<batteryRate>2500</batteryRate> <!-- rate in W -->
 	
 	<printResults>false</printResults> <!-- print detailed results on the console -->
 	<printStats>true</printStats> <!-- print summarized statistics on the console -->
@@ -67,7 +68,7 @@ Example configuration of the simulator:
 ## Configuration of services via XML
 Services are also configured using a XML file services.xml, in which all services are listed together with their properties.
 
-Each service is defined by specifying a name, its power consumption (Wh), its priority, whether it is a smart service (it can be dynamically controlled by the service controller) and the operating range rule.
+Each service is defined by specifying a name, its power consumption (W), its priority, whether it is a smart service (it can be dynamically controlled by the service controller) and the operating range rule.
 
 Operating range rules are used to limit some services to a specific time slot and maximum on-time, for instance, fence lights should only be switched on at night (between 8 pm and 8 am), or the pool pump should only be switched on during the day but for a maximum of three hours, these types of rules allow some services to be switched on at different hours giving the possibility to reduce their energy impact.
 
@@ -79,7 +80,7 @@ XML structure of each service:
 		....
 		<service>
 			<name></name>			<!-- string name -->
-			<power></power>			<!-- power consumption in Wh -->
+			<power></power>			<!-- power consumption in W -->
 			<smart></smart>			<!-- smart management -->
 			<operatingRange>		<!-- time rule -->
 				<type></type>		<!-- 1: between, 2: outside -->
@@ -101,13 +102,13 @@ XML structure of each service:
 Table of configured services in the demo code:
 | Service            | Smart | Priority | Load   | Rule              |
 |--------------------|-------|----------|--------|-------------------|
-| Fence lights       | No    | -        | 15 Wh  | 8pm-8am           |
-| Facade lights      | No    | -        | 10 Wh  | 8pm-8am           |
-| Fridge             | No    | -        | 120 Wh | All time          |
-| CCTV DVR           | Yes   | 10       | 20 Wh  | All time          |
-| Internet           | Yes   | 8        | 40 Wh  | All time          |
-| Pool Pump          | Yes   | 4        | 600 Wh | 9am-5pm (max 3h)  |
-| Streaming Services | Yes   | 2        | 30 Wh  | All time          |
+| Fence lights       | No    | -        | 15 W   | 8pm-8am           |
+| Facade lights      | No    | -        | 10 W   | 8pm-8am           |
+| Fridge             | No    | -        | 120 W  | All time          |
+| CCTV DVR           | Yes   | 10       | 20 W   | All time          |
+| Internet           | Yes   | 8        | 40 W   | All time          |
+| Pool Pump          | Yes   | 4        | 600 W  | 9am-5pm (max 3h)  |
+| Streaming Services | Yes   | 2        | 30 W   | All time          |
 | Fountain           | Yes   | 1        | 35 Wh  | 9am-3pm           |
 
 

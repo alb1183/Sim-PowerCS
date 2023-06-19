@@ -1,7 +1,7 @@
 package com.um.simEnergy.Service;
 
 import java.util.Arrays;
-import java.util.function.IntPredicate;
+//import java.util.function.IntPredicate;
 
 public class Service {
 	private String name;
@@ -9,7 +9,7 @@ public class Service {
 	private double powerConsumption; // Wh
 	private int[] operatingRange = new int[3]; // modo, min, max
 	private int priority;
-	private IntPredicate intPredicate;
+	//private IntPredicate intPredicate;
 
 	private boolean onOff = true;
 	
@@ -32,10 +32,10 @@ public class Service {
 		this(name, smart, powerConsumption, new int[]{0,0,0});
 	}
 	
-	public Service(String name, boolean smart, double powerConsumption, IntPredicate intPredicate) {
+	/*public Service(String name, boolean smart, double powerConsumption, IntPredicate intPredicate) {
 		this(name, smart, powerConsumption, new int[]{0,0,0});
 		this.intPredicate = intPredicate;
-	}
+	}*/
 	
 	public Service(String name, boolean smart, double powerConsumption, int priority) {
 		this(name, smart, powerConsumption, new int[]{0,0,0});
@@ -165,8 +165,8 @@ public class Service {
 			return 0.0;
 		
 		// Si tiene definida una expresion lambda la ejecuto
-		if(intPredicate != null && intPredicate.test(minuteDay))
-			return load;
+		/*if(intPredicate != null && intPredicate.test(minuteDay))
+			return load;*/
 		
 		// Si no tiene definido un rango devuelvo directamente el consumo
 		if(this.operatingRange[0] == 0)
@@ -188,8 +188,7 @@ public class Service {
 	@Override
 	public String toString() {
 		return "Service [name=" + name + ", smart=" + smart + ", powerConsumption=" + powerConsumption
-				+ ", operatingRange=" + Arrays.toString(operatingRange) + ", priority=" + priority + ", intPredicate="
-				+ intPredicate + ", onOff=" + onOff + "]";
+				+ ", operatingRange=" + Arrays.toString(operatingRange) + ", priority=" + priority + ", onOff=" + onOff + "]";
 	}
 	
 	

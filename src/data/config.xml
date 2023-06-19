@@ -3,8 +3,9 @@
 	<controller>DummyOn</controller>
 	<procedural>true</procedural>
 	<seed>0</seed>
-	<days>7</days>
+	<days>5</days>
 	<battery>4000</battery>
+	<batteryRate>2500</batteryRate>
 	
 	<printResults>false</printResults>
 	<printStats>true</printStats>
